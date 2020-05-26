@@ -11,6 +11,9 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatCardModule} from '@angular/material/card';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { HttpClientModule } from '@angular/common/http';
+
+
 import {MatChipsModule} from '@angular/material/chips';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatDatepickerModule} from '@angular/material/datepicker';
@@ -74,6 +77,7 @@ import {MatTreeModule} from '@angular/material/tree';
     MatTableModule,
     MatTabsModule,
     MatToolbarModule,
+    HttpClientModule,
     MatTooltipModule,
     MatTreeModule
   ],
@@ -83,6 +87,7 @@ import {MatTreeModule} from '@angular/material/tree';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     MatBadgeModule,
     MatBottomSheetModule,

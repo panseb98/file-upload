@@ -11,9 +11,9 @@ export class UploadfileService {
   addFile(file : File){
     var formData = new FormData();
     formData.append('file', file);
-    return this.http.post('https://localhost:44307/matkaMozejki', formData);
+    return this.http.post('https://localhost:8080/save', formData);
   }
   getData(){
-    return this.http.get<Array<XmlModel>>('https://localhost:44307/matkaMozejki');
+    return this.http.get<Array<XmlModel>>('https://localhost:8080/getAllUsers');
   }
 }

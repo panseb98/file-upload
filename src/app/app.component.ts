@@ -14,7 +14,7 @@ export class AppComponent {
   @ViewChild('fileInput', { read: ElementRef })
   file: ElementRef;
   title = 'file-upload';
-  displayedColumns = ['name', 'surname', 'city', 'birthdate', 'phone'];
+  displayedColumns = ['name', 'surname', 'city', 'phone'];
   myDate = new Date();
   dataSource: MatTableDataSource<XmlModel>;
   [x: string]: any;
@@ -25,13 +25,14 @@ export class AppComponent {
   }
   private initItems(){
     this._service.getData().subscribe(res => {
+      console.log(res);
       this.dataSource = new MatTableDataSource(res as Array<XmlModel>);
     });
   }
   ngOnInit(){
     this.initItems();
   }
-  ELEMENT_DATA: XmlModel[] = [
+  /*ELEMENT_DATA: XmlModel[] = [
     {surname: 'asd', name: 'Hydrogen', phone: '123123123123', city: 'H', birthDate: this.myDate, id: 1},
     {surname: 'asd', name: 'Hydrogen', phone: '123123123123', city: 'H', birthDate: this.myDate, id: 1},
     {surname: 'asd', name: 'Hydrogen', phone: '123123123123', city: 'H', birthDate: this.myDate, id: 1},
@@ -40,7 +41,7 @@ export class AppComponent {
     {surname: 'asd', name: 'Hydrogen', phone: '123123123123', city: 'H', birthDate: this.myDate, id: 1},
     {surname: 'asd', name: 'Hydrogen', phone: '123123123123', city: 'H', birthDate: this.myDate, id: 1},
     {surname: 'asd', name: 'Hydrogen', phone: '123123123123', city: 'H', birthDate: this.myDate, id: 1}
-  ];
+  ];*/
   openSnackBar(file : File[]) {
     const files = (this.file.nativeElement as HTMLInputElement).files;
     for (let i = 0; i < files.length; i++) {
@@ -49,7 +50,7 @@ export class AppComponent {
         return;
       }
       else{
-        this._service.addFile(files[i] as File).subscribe(res => {this.openAlert(res as string);     this.initItems(); }, err => this.openAlert(err as string));
+        this._service.addFile(files[i] as File).subscribe(res => {this.openAlert(res as string);  console.log(res);   this.initItems(); }, err => {this.openAlert(err as string); console.log(err);});
       }
     }
         this.initItems();

@@ -4,5 +4,4 @@ export class XmlModel{
     surname : string;
     city: string;
     phone : string;
-    birthDate : Date;
 }

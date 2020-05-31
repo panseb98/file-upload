@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import {MatSnackBar, MatFormFieldControl} from '@angular/material';
+import {MatSnackBar, MatFormFieldControl, MatTableDataSource} from '@angular/material';
 import { FormControl, FormGroup, NgForm, FormBuilder } from '@angular/forms';
 import { XmlModel } from './model';
 import { UploadfileService } from './uploadfile.service';
@@ -16,12 +16,20 @@ export class AppComponent {
   title = 'file-upload';
   displayedColumns = ['name', 'surname', 'city', 'birthdate', 'phone'];
   myDate = new Date();
+  dataSource: MatTableDataSource<XmlModel>;
+  [x: string]: any;
 
   constructor(private _snackBar: MatSnackBar, public _service : UploadfileService) {
-    
+    this.dataSource = new MatTableDataSource(this.items);
+
+  }
+  private initItems(){
+    this._service.getData().subscribe(res => {
+      this.dataSource = new MatTableDataSource(res as Array<XmlModel>);
+    });
   }
   ngOnInit(){
-    
+    this.initItems();
   }
   ELEMENT_DATA: XmlModel[] = [
     {surname: 'asd', name: 'Hydrogen', phone: '123123123123', city: 'H', birthDate: this.myDate, id: 1},
@@ -41,9 +49,11 @@ export class AppComponent {
         return;
       }
       else{
-        this._service.addFile(files[i] as File).subscribe(res => this.openAlert(res as string), err => this.openAlert(err as string));
+        this._service.addFile(files[i] as File).subscribe(res => {this.openAlert(res as string);     this.initItems(); }, err => this.openAlert(err as string));
       }
     }
+        this.initItems();
+
 
   }
   private openAlert(name : string){

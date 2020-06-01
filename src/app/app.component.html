@@ -2,10 +2,8 @@
 <mat-tab-group >
   <mat-tab label="Prześlij plik">
 <h1>Dodaj plik XML</h1>
-<input  #fileInput type="file">
-
-<button mat-stroked-button (click)="openSnackBar($event.target.files)">Prześlij plik</button>
-
+<input  #fileInput type="file" (change)="onChange11($event)">
+<button mat-stroked-button (click)="onChange11($event.target.files)">Prześlij plik</button>
 </mat-tab>
 <mat-tab label="Zobacz dane">
   <div class="example-container mat-elevation-z8">

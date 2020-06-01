@@ -1,7 +1,13 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { XmlModel } from './model';
-
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type':  'application/xml', //<- To SEND XML
+    'Accept':  'application/xml',       //<- To ask for XML
+    'Response-Type': 'text'             //<- b/c Angular understands text
+  })
+};
 @Injectable({
   providedIn: 'root'
 })
@@ -12,7 +18,7 @@ export class UploadfileService {
     console.log(file);
     var formData = new FormData();
     formData.append('file', file);
-    return this.http.post('http://localhost:8080/save', formData);
+    return this.http.post('http://localhost:8080/save', formData, httpOptions);
   }
   getData(){
     return this.http.get<Array<XmlModel>>('http://localhost:8080/getAllUsers');

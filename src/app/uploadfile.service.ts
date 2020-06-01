@@ -11,9 +11,9 @@ export class UploadfileService {
   addFile(file : File){
     var formData = new FormData();
     formData.append('file', file);
-    return this.http.post('https://localhost:8080/save', formData);
+    return this.http.post('http://localhost:8080/save', formData);
   }
   getData(){
-    return this.http.get<Array<XmlModel>>('https://localhost:8080/getAllUsers');
+    return this.http.get<Array<XmlModel>>('http://localhost:8080/getAllUsers');
   }
 }

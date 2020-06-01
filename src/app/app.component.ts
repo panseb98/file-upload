@@ -55,22 +55,32 @@ export class AppComponent {
     {surname: 'asd', name: 'Hydrogen', phone: '123123123123', city: 'H', birthDate: this.myDate, id: 1},
     {surname: 'asd', name: 'Hydrogen', phone: '123123123123', city: 'H', birthDate: this.myDate, id: 1}
   ];*/
-  fileOutput;
   public onChange11(event) {
+      console.log('di');
       var file = event.target.files[0];
+      var reader = new FileReader();
       if(!types.includes(file.type)){
+        console.log('di');
+
         this.openAlert('Typ pliku ' + file.name + ' nie jest akceptowany');
         return;
       }
       else{
+        console.log(file.type);
+
         if (file.type == 'text/xml'){
+          console.log('touch');
+
           var reader = new FileReader();
           reader.onload = (e: any) => {
+            console.log('touch');
+
             // The file's text will be printed here
             this._service.addFile(e.target.result as File).subscribe(res => {this.openAlert(res as string);  console.log(res);   this.initItems(); }, err => {this.openAlert(err as string); console.log(err);});
              
-            
           };
+          reader.readAsText(file);
+
         }
         else{
           this._service.addFile(file as File).subscribe(res => {this.openAlert(res as string);  console.log(res);   this.initItems(); }, err => {this.openAlert(err as string); console.log(err);});

@@ -9,6 +9,7 @@ export class UploadfileService {
   constructor(private http : HttpClient) { }
 
   addFile(file : File){
+    console.log(file);
     var formData = new FormData();
     formData.append('file', file);
     return this.http.post('http://localhost:8080/save', formData);
